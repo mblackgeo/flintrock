@@ -1,19 +1,20 @@
 import concurrent.futures
 import functools
 import json
+import logging
 import os
 import posixpath
 import shlex
 import sys
-import logging
 from concurrent.futures import FIRST_EXCEPTION
 
 # External modules
 import paramiko
 
-# Flintrock modules
-from .ssh import get_ssh_client, ssh_check_output, ssh, SSHKeyPair
 from .exceptions import SSHError
+
+# Flintrock modules
+from .ssh import SSHKeyPair, get_ssh_client, ssh, ssh_check_output
 
 FROZEN = getattr(sys, 'frozen', False)
 
@@ -673,7 +674,7 @@ def setup_node(
         command=(
             """
             set -e
-            sudo yum install -y python3
+            ! command -v python3 &> /dev/null && sudo yum install python3 -y
             """
         )
     )
