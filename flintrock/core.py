@@ -669,15 +669,15 @@ def setup_node(
 
     # TODO: Move Python and Java setup to new service under services.py.
     #       New service to cover Python/Scala/Java: LanguageRuntimes (name?)
-    ssh_check_output(
-        client=ssh_client,
-        command=(
-            """
-            set -e
-            ! command -v python3 &> /dev/null && sudo yum install python3 -y
-            """
-        )
-    )
+    # ssh_check_output(
+    #     client=ssh_client,
+    #     command=(
+    #         """
+    #         set -e
+    #         ! command -v python3 &> /dev/null && sudo yum install python3 -y
+    #         """
+    #     )
+    # )
     ensure_java(ssh_client, java_version)
 
     for service in services:
